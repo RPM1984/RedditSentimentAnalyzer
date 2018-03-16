@@ -19,6 +19,7 @@
 *.sbr
 *.scc
 *.tmp
+*.suo
 [Bb]in/
 [Dd]ebug/
 obj/

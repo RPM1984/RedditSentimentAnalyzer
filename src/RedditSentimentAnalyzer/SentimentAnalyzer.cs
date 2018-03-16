@@ -15,6 +15,16 @@ namespace RedditSentimentAnalyzer
         private readonly IAzureSentimentAnalyzer _sentimentAnalyzer;
         private readonly IRedditSearch _redditSearch;
 
+        // tests
+        public SentimentAnalyzer(ILogger logger,
+                                 IAzureSentimentAnalyzer azureSentimentAnalyzer,
+                                 IRedditSearch redditSearch)
+        {
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _sentimentAnalyzer = azureSentimentAnalyzer ?? throw new ArgumentNullException(nameof(azureSentimentAnalyzer));
+            _redditSearch = redditSearch ?? throw new ArgumentNullException(nameof(azureSentimentAnalyzer));
+        }
+
         public SentimentAnalyzer(ILogger logger,
                                  string azureCognitiveServicesSubscriptionKey,
                                  AzureRegions azureCognitiveServicesRegion)
