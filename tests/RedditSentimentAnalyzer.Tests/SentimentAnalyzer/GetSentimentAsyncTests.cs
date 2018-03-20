@@ -44,7 +44,27 @@ namespace RedditSentimentAnalyzer.Tests.SentimentAnalyzer
             const string subreddit = "cryptocurrency";
             const string searchTerm = "bitcoin";
 
-            var redditResults = GenFu.GenFu.ListOf<SearchResult>();
+            var redditResults = new[]
+            {
+                new SearchResult
+                {
+                    Title = "title",
+                    Content = "content",
+                    Permalink = "xyz"
+                },
+                new SearchResult
+                {
+                    Title = "title2",
+                    Content = "content2",
+                    Permalink = "xyz2"
+                },
+                new SearchResult
+                {
+                    Title = "title3",
+                    Content = "content3",
+                    Permalink = "xyz3"
+                }
+            };
             redditSearch.Setup(x => x.SearchAsync(subreddit, searchTerm, 100))
                         .ReturnsAsync(redditResults);
 

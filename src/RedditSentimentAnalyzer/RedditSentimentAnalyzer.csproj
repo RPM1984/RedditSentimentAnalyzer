@@ -3,6 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <DebugType>full</DebugType>
+    <Authors>rpm1984</Authors>
+    <Company />
+    <PackageTags>reddit sentiment</PackageTags>
+    <Description>A dead-simple library to help analyze the sentiment of a particular term on Reddit.</Description>
+    <PackageProjectUrl>https://github.com/RPM1984/RedditSentimentAnalyzer</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/RPM1984/RedditSentimentAnalyzer/blob/master/LICENSE.md</PackageLicenseUrl>
+    <Version>1.0.0-pre</Version>
   </PropertyGroup>
 
   <ItemGroup>
