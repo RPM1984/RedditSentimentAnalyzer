@@ -7,6 +7,6 @@ namespace RedditSentimentAnalyzer.Models
     {
         public double Average => Posts.Average(sentiment => sentiment.Sentiment);
         public string Overall => Average.ToDescription();
-        public IEnumerable<RedditPost> Posts { get; set; } = Enumerable.Empty<RedditPost>();
+        public IEnumerable<RedditPost> Posts { get; set; }
     }
 }
