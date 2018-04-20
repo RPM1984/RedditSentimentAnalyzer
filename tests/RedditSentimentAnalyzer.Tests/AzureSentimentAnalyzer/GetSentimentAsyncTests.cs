@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.CognitiveServices.Language.TextAnalytics.Models;
 using Microsoft.Extensions.Logging;
@@ -28,7 +29,7 @@ namespace RedditSentimentAnalyzer.Tests.AzureSentimentAnalyzer
 
             var results = new SentimentBatchResult(content.Select(c => new SentimentBatchResultItem(c.Value.Item2, c.Value.Item1))
                                                           .ToList());
-            textAnalyticsClient.Setup(x => x.SentimentAsync(It.IsAny<IList<MultiLanguageInput>>()))
+            textAnalyticsClient.Setup(x => x.SentimentAsync(It.IsAny<IList<MultiLanguageInput>>(), CancellationToken.None))
                                .ReturnsAsync(results);
 
             // Act.
