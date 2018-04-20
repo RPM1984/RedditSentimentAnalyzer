@@ -12,7 +12,6 @@ namespace RedditSentimentAnalyzer.Analysis
         private readonly ILogger _logger;
         private readonly ITextAnalyticsApiWrapper _textAnalyticsApi;
 
-        // tests.
         public AzureSentimentAnalyzer(ILogger logger,
                                       ITextAnalyticsApiWrapper textAnalyticsApi)
         {
@@ -46,15 +45,18 @@ namespace RedditSentimentAnalyzer.Analysis
             var results = await _textAnalyticsApi.SentimentAsync(inputs)
                                                  .ConfigureAwait(false);
             var sentimentResults = new Dictionary<string, double>();
-            foreach (var result in results.Documents.Where(result => result.Score.HasValue))
+            if (results?.Documents != null)
             {
-                if (sentimentResults.ContainsKey(inputMaps[result.Id]) ||
-                    !result.Score.HasValue)
+                foreach (var result in results.Documents.Where(result => result.Score.HasValue))
                 {
-                    continue;
-                }
+                    if (sentimentResults.ContainsKey(inputMaps[result.Id]) ||
+                        !result.Score.HasValue)
+                    {
+                        continue;
+                    }
 
-                sentimentResults.Add(inputMaps[result.Id], result.Score.Value);
+                    sentimentResults.Add(inputMaps[result.Id], result.Score.Value);
+                }
             }
 
             return sentimentResults;

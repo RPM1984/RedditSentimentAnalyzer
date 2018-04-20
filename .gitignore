@@ -38,6 +38,7 @@ imagecache/
 [Aa]ssemblies/
 [Rr]aven/
 .vs/
+coverage.xml
 
 # Windows Azure
 csx/

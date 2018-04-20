@@ -43,5 +43,30 @@ namespace RedditSentimentAnalyzer.Tests.AzureSentimentAnalyzer
                 result.ShouldContainKeyAndValue(expected.Key, expected.Value.Item2);
             }
         }
+
+        [Fact]
+        public async Task GivenNoContent_GetSentimentAsync_ReturnsExpectedResult()
+        {
+            // Arrange.
+            var logger = new Mock<ILogger>();
+            var textAnalyticsClient = new Mock<ITextAnalyticsApiWrapper>();
+            var analyzer = new Analysis.AzureSentimentAnalyzer(logger.Object, textAnalyticsClient.Object);
+            var content = new Dictionary<string, Tuple<string, double>>
+            {
+                {"this is great", new Tuple<string, double>("1", 0.9)},
+                {"this is bad", new Tuple<string, double>("2", 0.1)}
+            };
+
+            var results = new SentimentBatchResult();
+            textAnalyticsClient.Setup(x => x.SentimentAsync(It.IsAny<IList<MultiLanguageInput>>(), CancellationToken.None))
+                               .ReturnsAsync(results);
+
+            // Act.
+            var result = await analyzer.GetSentimentAsync(content.Keys);
+
+            // Assert.
+            textAnalyticsClient.VerifyAll();
+            result.Keys.Count.ShouldBe(0);
+        }
     }
 }

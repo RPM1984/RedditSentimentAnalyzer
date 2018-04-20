@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using RedditSentimentAnalyzer.Analysis;
 using RedditSentimentAnalyzer.RedditSearch;
+using RedditSentimentAnalyzer.Tests.AzureSentimentAnalyzer;
 using Shouldly;
 using Xunit;
 
@@ -14,13 +15,13 @@ namespace RedditSentimentAnalyzer.Tests.SentimentAnalyzer
     public class GetSentimentAsyncTests
     {
         [Fact]
-        public async Task GivenASearchTermWithNothingConfigured_GetSentimentAsync_ReturnsEmtpyResult()
+        public async Task GivenASearchTermWithNothingConfigured_GetSentimentAsync_ReturnsEmptyResult()
         {
             // Arrange.
             var logger = new Mock<ILogger<RedditSentimentAnalyzer.SentimentAnalyzer>>();
             var sentimentAnalyzer = new Mock<IAzureSentimentAnalyzer>();
             var redditSearch = new Mock<IRedditSearch>();
-            var analyzer = new RedditSentimentAnalyzer.SentimentAnalyzer(logger.Object, sentimentAnalyzer.Object, redditSearch.Object);
+            var analyzer = new FakeAzureSentimentAnalyzer(logger.Object, sentimentAnalyzer.Object, redditSearch.Object);
             const string subreddit = "cryptocurrency";
             const string searchTerm = "bitcoin";
 
@@ -34,13 +35,61 @@ namespace RedditSentimentAnalyzer.Tests.SentimentAnalyzer
         }
 
         [Fact]
+        public async Task GivenASearchTermAndRedditConfiguredButNoResults_GetSentimentAsync_ReturnsNull()
+        {
+            // Arrange.
+            var logger = new Mock<ILogger<RedditSentimentAnalyzer.SentimentAnalyzer>>();
+            var sentimentAnalyzer = new Mock<IAzureSentimentAnalyzer>();
+            var redditSearch = new Mock<IRedditSearch>();
+            var analyzer = new FakeAzureSentimentAnalyzer(logger.Object, sentimentAnalyzer.Object, redditSearch.Object);
+            const string subreddit = "cryptocurrency";
+            const string searchTerm = "bitcoin";
+
+            var redditResults = new[]
+            {
+                new SearchResult
+                {
+                    Title = "title",
+                    Content = "content",
+                    Permalink = "xyz"
+                },
+                new SearchResult
+                {
+                    Title = "title2",
+                    Content = "content2",
+                    Permalink = "xyz2"
+                },
+                new SearchResult
+                {
+                    Title = "title3",
+                    Content = "content3",
+                    Permalink = "xyz3"
+                }
+            };
+            redditSearch.Setup(x => x.SearchAsync(subreddit, searchTerm, 100))
+                        .ReturnsAsync(redditResults);
+
+            sentimentAnalyzer.Setup(x => x.GetSentimentAsync(It.IsAny<IEnumerable<string>>()))
+                .ReturnsAsync((Dictionary<string,double>)null);
+
+            // Act.
+            var results = await analyzer.GetSentimentAsync(subreddit, searchTerm);
+
+            // Assert.
+            redditSearch.VerifyAll();
+            sentimentAnalyzer.VerifyAll();
+
+            results.ShouldBeNull();
+        }
+
+        [Fact]
         public async Task GivenASearchTermAndRedditConfigured_GetSentimentAsync_ReturnsResults()
         {
             // Arrange.
             var logger = new Mock<ILogger<RedditSentimentAnalyzer.SentimentAnalyzer>>();
             var sentimentAnalyzer = new Mock<IAzureSentimentAnalyzer>();
             var redditSearch = new Mock<IRedditSearch>();
-            var analyzer = new RedditSentimentAnalyzer.SentimentAnalyzer(logger.Object, sentimentAnalyzer.Object, redditSearch.Object);
+            var analyzer = new FakeAzureSentimentAnalyzer(logger.Object, sentimentAnalyzer.Object, redditSearch.Object);
             const string subreddit = "cryptocurrency";
             const string searchTerm = "bitcoin";
 
