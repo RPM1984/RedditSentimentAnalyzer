@@ -2,6 +2,7 @@
 
 [![Build Status](https://rpm1984.visualstudio.com/_apis/public/build/definitions/c48bc504-32f0-48e7-9b2f-af5a0de677aa/1/badge)](https://rpm1984.visualstudio.com/RedditSentimentAnalyzer/_build/index?definitionId=1)
 ![Codecov](https://img.shields.io/codecov/c/github/RPM1984/RedditSentimentAnalyzer.svg)
+[![NuGet Pre Release](https://img.shields.io/nuget/vpre/RedditSentimentAnalyzer.svg)](https://www.nuget.org/packages/RedditSentimentAnalyzer/)
 [![NuGet](https://img.shields.io/nuget/dt/RedditSentimentAnalyzer.svg)](https://www.nuget.org/packages/RedditSentimentAnalyzer/)
 
 ## What is this?
