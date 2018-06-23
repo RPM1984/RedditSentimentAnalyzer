@@ -9,12 +9,12 @@
     <Description>A dead-simple library to help analyze the sentiment of a particular term on Reddit.</Description>
     <PackageProjectUrl>https://github.com/RPM1984/RedditSentimentAnalyzer</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/RPM1984/RedditSentimentAnalyzer/blob/master/LICENSE.md</PackageLicenseUrl>
-    <Version>1.0.0-pre</Version>
+    <Version>1.1.0-pre</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.CognitiveServices.Language" Version="1.0.0-preview" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="Microsoft.Azure.CognitiveServices.Language" Version="1.0.1-preview" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 </Project>

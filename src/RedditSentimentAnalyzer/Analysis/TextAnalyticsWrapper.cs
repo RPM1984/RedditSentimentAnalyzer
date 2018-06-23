@@ -12,19 +12,15 @@ namespace RedditSentimentAnalyzer.Analysis
     {
         private readonly ITextAnalyticsAPI _client;
 
-        public TextAnalyticsWrapper(string subscriptionKey,
-                                    AzureRegions region)
+        public TextAnalyticsWrapper(string subscriptionKey, AzureRegions region)
         {
             if (string.IsNullOrWhiteSpace(subscriptionKey))
             {
                 throw new ArgumentNullException(nameof(subscriptionKey));
             }
 
-            _client = _client = new TextAnalyticsAPI
-            {
-                AzureRegion = region,
-                SubscriptionKey = subscriptionKey
-            };
+            _client = _client = new TextAnalyticsAPI(new ApiKeyServiceClientCredentials(subscriptionKey));
+            _client.AzureRegion = region;
         }
 
         public Task<SentimentBatchResult> SentimentAsync(IList<MultiLanguageInput> inputs,
