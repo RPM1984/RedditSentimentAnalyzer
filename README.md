@@ -1,12 +1,14 @@
 # RedditSentimentAnalyzer
-
 [![Build Status](https://rpm1984.visualstudio.com/_apis/public/build/definitions/c48bc504-32f0-48e7-9b2f-af5a0de677aa/1/badge)](https://rpm1984.visualstudio.com/RedditSentimentAnalyzer/_build/index?definitionId=1)
-![Codecov](https://img.shields.io/codecov/c/github/RPM1984/RedditSentimentAnalyzer.svg)
+[![Codecov](https://img.shields.io/codecov/c/github/RPM1984/RedditSentimentAnalyzer.svg)](https://codecov.io/gh/rpm1984/redditsentimentanalyzer)
 [![NuGet Pre Release](https://img.shields.io/nuget/vpre/RedditSentimentAnalyzer.svg)](https://www.nuget.org/packages/RedditSentimentAnalyzer/)
 [![NuGet](https://img.shields.io/nuget/dt/RedditSentimentAnalyzer.svg)](https://www.nuget.org/packages/RedditSentimentAnalyzer/)
 
 ## What is this?
 A dead-simple library to help analyze the sentiment of a particular term on Reddit.
+
+## Installation
+[![](https://i.imgur.com/xSve1A5.png)](https://www.nuget.org/packages/RedditSentimentAnalyzer)
 
 ## How to use
 1) Signup for a [Azure Cognitive Services](https://azure.microsoft.com/en-gb/try/cognitive-services/?api=text-analytics) account. You can get 5,000 free transactions/month for free. Note down your API key and region for your account.
@@ -20,5 +22,3 @@ var analyzer = new SentimentAnalyzer(logger,
 ```
 var results = await analyzer.GetSentimentAsync("cryptocurrency", "bitcoin");
 ```
-
-Nuget coming soon :)
