@@ -8,7 +8,7 @@
 A dead-simple library to help analyze the sentiment of a particular term on Reddit.
 
 ## Installation
-[![](https://i.imgur.com/xSve1A5.png)](https://www.nuget.org/packages/RedditSentimentAnalyzer)
+[![](https://i.imgur.com/C17SAhS.png)](https://www.nuget.org/packages/RedditSentimentAnalyzer)
 
 ## How to use
 1) Signup for a [Azure Cognitive Services](https://azure.microsoft.com/en-gb/try/cognitive-services/?api=text-analytics) account. You can get 5,000 free transactions/month for free. Note down your API key and region for your account.
